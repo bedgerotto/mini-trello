@@ -1,19 +1,34 @@
 <!-- Projects Row -->
 <div class="row">
-    <div class="col-md-4 portfolio-item">
-        <a href="#">
-            <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-        </a>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">To Do</div>
+            <div class="panel-body">
+                <%= render partial: "home/shared/card", locals: {content: "History 1"} %>
+                <%= render partial: "home/shared/card", locals: {content: "History 9"} %>
+            </div>
+        </div> 
     </div>
-    <div class="col-md-4 portfolio-item">
-        <a href="#">
-            <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-        </a>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Doing</div>
+            <div class="panel-body">
+                <%= render partial: "home/shared/card", locals: {content: "History 2"} %>
+                <%= render partial: "home/shared/card", locals: {content: "History 6"} %>
+                <%= render partial: "home/shared/card", locals: {content: "History 7"} %>
+                <%= render partial: "home/shared/card", locals: {content: "History 8"} %>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4 portfolio-item">
-        <a href="#">
-            <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-        </a>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Done</div>
+            <div class="panel-body">
+                <%= render partial: "home/shared/card", locals: {content: "History 3"} %>
+                <%= render partial: "home/shared/card", locals: {content: "History 4"} %>
+                <%= render partial: "home/shared/card", locals: {content: "History 5"} %>
+            </div>
+        </div>
     </div>
 </div>
 <!-- /.row -->
