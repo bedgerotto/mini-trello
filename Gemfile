@@ -25,6 +25,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Devise is a flexible authentication solution for Rails based on Warden. It:
 gem 'devise'
+# Enables PostgreSql database usage
+gem 'pg'
+# A simple asset-pipeline wrapper for Vue.js by Evan You
+gem 'vuejs-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
