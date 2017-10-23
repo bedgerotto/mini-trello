@@ -10,6 +10,7 @@ class CreateHistories < ActiveRecord::Migration
       t.datetime :finished_at
       t.datetime :deadline
       t.integer :points
+      t.integer :project_id
 
       t.timestamps null: false
     end

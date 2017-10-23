@@ -2,10 +2,15 @@
 <div class="row">
     <div class="col-md-4">
         <div class="panel panel-default">
-            <div class="panel-heading">To Do</div>
+            <div class="panel-heading">To Do
+            <a href="javascript" ng-if="project" class="pull-right"><i class="glyphicon glyphicon-plus"></i></a>
+            </div>
             <div class="panel-body">
-                <%= render partial: "home/shared/card", locals: {content: "History 1"} %>
-                <%= render partial: "home/shared/card", locals: {content: "History 9"} %>
+                <div class="panel panel-default" ng-repeat="pending in histories.pending">
+                    <div class="panel-body">
+                        Nome: {{ pending.name }} --- Descrição: {{ pending.description }}
+                    </div>
+                </div>
             </div>
         </div> 
     </div>
@@ -13,10 +18,11 @@
         <div class="panel panel-default">
             <div class="panel-heading">Doing</div>
             <div class="panel-body">
-                <%= render partial: "home/shared/card", locals: {content: "History 2"} %>
-                <%= render partial: "home/shared/card", locals: {content: "History 6"} %>
-                <%= render partial: "home/shared/card", locals: {content: "History 7"} %>
-                <%= render partial: "home/shared/card", locals: {content: "History 8"} %>
+                <div class="panel panel-default" ng-if="histories.started" ng-repeat="started in histories.started">
+                    <div class="panel-body">
+                        Nome: {{ started.name }} --- Descrição: {{ started.description }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -24,11 +30,15 @@
         <div class="panel panel-default">
             <div class="panel-heading">Done</div>
             <div class="panel-body">
-                <%= render partial: "home/shared/card", locals: {content: "History 3"} %>
-                <%= render partial: "home/shared/card", locals: {content: "History 4"} %>
-                <%= render partial: "home/shared/card", locals: {content: "History 5"} %>
+                <div class="panel panel-default" ng-if="histories.delivered" ng-repeat="delivered in histories.delivered">
+                    <div class="panel-body">
+                        Nome: {{ delivered.name }} --- Descrição: {{ delivered.description }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <!-- /.row -->
+
+<%= render partial: 'home/shared/project_modal'  %>
