@@ -1,0 +1,11 @@
+<div class="dropdown">
+  <button class="btn btn-inverse dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <%= current_person.name %>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><%= link_to "Edit", edit_person_registration_path, method: :get %></li>
+    <li role="separator" class="divider"></li>
+    <li><%= link_to "Sign out", destroy_person_session_path, method: :delete %></li>
+  </ul>
+</div>

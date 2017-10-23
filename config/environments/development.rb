@@ -1,6 +1,19 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  # Better errors
+  #BetterErrors::Middleware.allow_ip! env['TRUSTED_IP'] if env['TRUSTED_IP']
+  if defined?(BetterErrors)
+    BetterErrors.editor = proc { |full_path, line|
+      full_path = full_path.sub(Rails.root.to_s, ENV["VAGRANT_HOST_PATH"])
+      "subl://open?url=file://#{full_path}&line=#{line}"
+    }
+  end
+  if defined?(BetterErrors) && ENV["SSH_CLIENT"]
+    host = ENV["SSH_CLIENT"].match(/\A([^\s]*)/)[1]
+    BetterErrors::Middleware.allow_ip! host if host
+  end
+  # Devise config
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

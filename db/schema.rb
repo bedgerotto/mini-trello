@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20171021175104) do
     t.datetime "finished_at"
     t.datetime "deadline"
     t.integer  "points"
+    t.integer  "project_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(version: 20171021175104) do
 
   add_foreign_key "histories", "people", column: "owner_id"
   add_foreign_key "histories", "people", column: "requester_id"
+  add_foreign_key "histories", "projects"
   add_foreign_key "projects", "people", column: "manager_id"
   add_foreign_key "tasks", "histories"
 end
