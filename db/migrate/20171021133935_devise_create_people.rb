@@ -1,4 +1,4 @@
-class DeviseCreatePeople < ActiveRecord::Migration
+class DeviseCreatePeople < ActiveRecord::Migration[5.1]
   def change
     create_table :people do |t|
       ## Database authenticatable

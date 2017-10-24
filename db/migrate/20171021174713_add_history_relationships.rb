@@ -1,4 +1,4 @@
-class AddHistoryRelationships < ActiveRecord::Migration
+class AddHistoryRelationships < ActiveRecord::Migration[5.1]
   def change
     # Field requester_id references Person.id
     add_foreign_key :histories, :people, column: "requester_id"
