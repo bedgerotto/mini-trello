@@ -12,14 +12,14 @@ gem 'activejob', '5.1.4'
 gem 'activemodel', '5.1.4'
 gem 'activerecord', '5.1.4'
 gem 'activesupport', '5.1.4'
-gem 'bundler', '>= 1.3.0'
+gem 'bundler', '>= 1.15.4'
 gem 'railties', '5.1.4'
 gem 'sprockets-rails', '>= 2.0.0'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+#gem 'sqlite3', '1.3.13'
 # Use SCSS for stylesheets
-gem 'sass-rails', github: "rails/sass-rails", branch: "5-0-stable"
+gem 'sass-rails', ">= 5.0.0"
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -76,3 +76,5 @@ group :development do
   gem 'spring'
 end
 
+
+ruby '2.3.5'
