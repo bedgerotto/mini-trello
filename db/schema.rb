@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -16,54 +15,53 @@ ActiveRecord::Schema.define(version: 20171021175104) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "histories", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "requester_id"
-    t.string   "status"
-    t.integer  "owner_id"
-    t.text     "description"
+  create_table "histories", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.integer "requester_id"
+    t.string "status"
+    t.integer "owner_id"
+    t.text "description"
     t.datetime "started_at"
     t.datetime "finished_at"
     t.datetime "deadline"
-    t.integer  "points"
-    t.integer  "project_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  create_table "people", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "name"
-    t.string   "role"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-  end
-
-  add_index "people", ["email"], name: "index_people_on_email", unique: true, using: :btree
-  add_index "people", ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true, using: :btree
-
-  create_table "projects", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "manager_id"
+    t.integer "points"
+    t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "tasks", force: :cascade do |t|
-    t.string   "description"
-    t.integer  "history_id"
-    t.boolean  "done"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "people", id: :serial, force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "name"
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_people_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
+  end
+
+  create_table "projects", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.integer "manager_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", id: :serial, force: :cascade do |t|
+    t.string "description"
+    t.integer "history_id"
+    t.boolean "done"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "histories", "people", column: "owner_id"
