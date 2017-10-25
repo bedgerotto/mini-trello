@@ -2,7 +2,7 @@
 var app = angular.module('miniTrello', []);
 
 // initialize angular controller
-app.controller('MainCtrl', function($scope, $http) {
+app.controller('MainCtrl', ['$scope', '$http', function($scope, $http) {
     // Defining default label when no project was selected
     $scope.projectName = "Select your project"
 
@@ -31,4 +31,4 @@ app.controller('MainCtrl', function($scope, $http) {
             }
         )
     }
-});
+}]);
