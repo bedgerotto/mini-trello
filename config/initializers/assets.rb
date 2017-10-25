@@ -14,6 +14,6 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
 # Custom assets to Precompile
-Rails.application.config.assets.precompile += %w( main.js )
-Rails.application.config.assets.precompile += %w( projectModal.js )
-Rails.application.config.assets.precompile += %w( bootstrap-theme.js )
+Rails.application.config.assets.precompile += %w[main.js]
+Rails.application.config.assets.precompile += %w[projectModal.js]
+Rails.application.config.assets.precompile += %w[bootstrap-theme.js]

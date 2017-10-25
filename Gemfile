@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # gem 'rails', '4.2.5'
 gem 'rails', '5.1.4'
@@ -17,9 +16,9 @@ gem 'railties', '5.1.4'
 gem 'sprockets-rails', '>= 2.0.0'
 
 # Use sqlite3 as the database for Active Record
-#gem 'sqlite3', '1.3.13'
+# gem 'sqlite3', '1.3.13'
 # Use SCSS for stylesheets
-gem 'sass-rails', ">= 5.0.0"
+gem 'sass-rails', '>= 5.0.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -52,29 +51,30 @@ gem 'vuejs-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem "select2-rails"
+gem 'select2-rails'
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-bootstrap', '3.3.7'
   gem 'rails-assets-angular', '1.6.6'
+  gem 'rails-assets-bootstrap', '3.3.7'
 end
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  # Call 'byebug' anywhere in the code to stop execution
+  # and get a debugger console
   gem 'byebug'
   gem 'rubocop'
-  gem "better_errors"
-  gem "binding_of_caller"
 end
 
 group :development do
+  gem 'listen'
+  # Spring speeds up development by keeping your application running in the
+  # background. Read more: https://github.com/rails/spring
+  gem 'spring'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console'
-  gem 'listen'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
 end
-
 
 ruby '2.3.5'
