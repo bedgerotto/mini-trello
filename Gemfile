@@ -42,6 +42,7 @@ gem 'pg'
 # A simple asset-pipeline wrapper for Vue.js by Evan You
 gem 'vuejs-rails'
 
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -53,13 +54,19 @@ gem 'vuejs-rails'
 
 gem 'select2-rails'
 
+gem 'angular_rails_csrf'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular', '1.6.6'
   gem 'rails-assets-bootstrap', '3.3.7'
+  gem 'rails-assets-fontawesome'
+  gem 'rails-assets-datetimepicker'
+  gem 'rails-assets-dragular'
 end
 
 group :development, :test do
 
+  gem 'rspec-rails', '~> 3.0'
   gem 'better_errors'
   gem 'binding_of_caller'
   # Call 'byebug' anywhere in the code to stop execution
@@ -75,6 +82,8 @@ group :development do
   gem 'spring'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console'
+
+  gem 'rails-assets-bootstrap-notify'
 end
 
 ruby '2.3.5'
