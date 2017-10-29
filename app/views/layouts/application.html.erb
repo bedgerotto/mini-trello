@@ -2,10 +2,10 @@
 <html>
 <head>
   <title>MiniTrello</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body ng-app="miniTrello" ng-controller="MainCtrl">
+<body ng-app="miniTrello" ng-controller="MainCtrl" ng-init="init()">
 
 <%= render partial: "layouts/shared/navbar" %>
 <!-- Page Content -->

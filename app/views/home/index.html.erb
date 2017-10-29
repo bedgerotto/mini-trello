@@ -1,44 +1,81 @@
 <!-- Projects Row -->
 <div class="row">
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">To Do
-            <a href="javascript" ng-if="project" class="pull-right"><i class="glyphicon glyphicon-plus"></i></a>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">To Do
+      <a ng-show="select" class="pull-right" ng-click="newHistory()"><i class="glyphicon glyphicon-plus"></i></a>
+      </div>
+      <div class="panel-body containerVertical" data-status="pending">
+        <div class="panel panel-default" ng-repeat="pending in histories.pending">
+          <div class="panel-body" data-card-id="{{pending.id}}">
+            <div class="col-md-10">
+              <p>{{ pending.name }}</p>
             </div>
-            <div class="panel-body">
-                <div class="panel panel-default" ng-repeat="pending in histories.pending">
-                    <div class="panel-body">
-                        Nome: {{ pending.name }} --- Descrição: {{ pending.description }}
-                    </div>
-                </div>
+            <div class="dropdown col-md-2">
+              <a href="javascript:;" class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="glyphicon glyphicon-option-horizontal"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="javascript:;" ng-click="changeHistory($index, 'pending')">Edit</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="javascript:;" ng-click="rmHistory(pending.id, $index, 'pending')">Delete</a></li>
+              </ul>
             </div>
-        </div> 
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Doing</div>
-            <div class="panel-body">
-                <div class="panel panel-default" ng-if="histories.started" ng-repeat="started in histories.started">
-                    <div class="panel-body">
-                        Nome: {{ started.name }} --- Descrição: {{ started.description }}
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Done</div>
-            <div class="panel-body">
-                <div class="panel panel-default" ng-if="histories.delivered" ng-repeat="delivered in histories.delivered">
-                    <div class="panel-body">
-                        Nome: {{ delivered.name }} --- Descrição: {{ delivered.description }}
-                    </div>
-                </div>
+      </div>
+    </div> 
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">Doing</div>
+      <div class="panel-body containerVertical" data-status="started">
+        <div class="panel panel-default" ng-if="histories.started" ng-repeat="started in histories.started">
+          <div class="panel-body" data-card-id="{{started.id}}">
+            <div class="col-md-10">
+              <p>{{ started.name }}</p>
             </div>
+            <div class="dropdown col-md-2">
+              <a href="javascript:;" class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="glyphicon glyphicon-option-horizontal"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="javascript:;" ng-click="changeHistory($index, 'started')">Edit</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="javascript:;" ng-click="rmHistory(started.id, $index, 'started')">Delete</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">Done</div>
+      <div class="panel-body containerVertical" data-status="delivered">
+        <div class="panel panel-default" ng-if="histories.delivered" ng-repeat="delivered in histories.delivered">
+          <div class="panel-body" data-card-id="{{delivered.id}}">
+            <div class="col-md-10">
+              <p>{{ delivered.name }}</p>
+            </div>
+            <div class="dropdown col-md-2">
+              <a href="javascript:;" class="dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="glyphicon glyphicon-option-horizontal"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="javascript:;" ng-click="changeHistory($index, 'delivered')">Edit</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="javascript:;" ng-click="rmHistory(delivered.id, $index, 'delivered')">Delete</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- /.row -->
 
 <%= render partial: 'home/shared/project_modal'  %>
+<%= render partial: 'home/shared/history_modal'  %>

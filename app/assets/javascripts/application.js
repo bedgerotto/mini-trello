@@ -15,5 +15,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require bootstrap-notify
+//= require datetimepicker
 //= require select2
+//= require dragular
 //= require_tree .
+
+$(document).ready(function() {
+    $('#deadline').datetimepicker();
+})

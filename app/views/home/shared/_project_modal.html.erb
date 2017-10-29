@@ -6,14 +6,49 @@
         <h4 class="modal-title">Select a project</h4>
       </div>
       <div class="modal-body">
-        <select id="projectDropdown" class="form-control" ng-model="project">
-          <%= options_for_select(@projects) %>
-        </select>
+        <div class="row">
+          <div class="col-md-9">
+            <select
+              id="projectDropdown"
+              class="form-control"
+              ng-model="select"
+              ng-options="project as project.label for project in projects track by project.id"
+            >
+              
+            </select>
+          </div>
+          <div class="col-md-1" ng-if="select">
+            <button type="button" class="btn btn-danger pull-right" ng-click="rmProject(select)"><i class="glyphicon glyphicon-trash"></i></button>
+          </div>
+          <div class="col-md-2" ng-if="select">
+            <button type="button" class="btn btn-primary pull-right" ng-click="selectProject()"><i class="glyphicon glyphicon-ok"></i> Select</button>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" ng-click="selectProject()">Select</button>
+          <button type="button" class="btn btn-default" ng-click="newProject()"><i class="glyphicon glyphicon-plus"></i> New Project</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<%= javascript_include_tag 'projectModal', 'data-turbolinks-track' => true %>
+
+<div id="newProjectModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Set a name for your project</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-10">
+            <input type="text" name="newProject" id="newProjectName" class="form-control" placeholder="Project name...">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="saveNewProject()"><i class="glyphicon glyphicon-plus"></i> Save</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -1,0 +1,69 @@
+<div id="newHistoryModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <form ng-submit='saveHistory()'>
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="historyTitelId">{{ !update ? 'New History' : 'Update History' }}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+              <div class="col-md-4 form-group">
+                <%= label_tag(:name, "Name:") %>
+                <%= text_field_tag(:name, '', class: "form-control", 'ng-model': 'history.name') %>
+              </div>
+              <div class="col-md-4 form-group">
+                <%= label_tag(:requester_id, "Requester:") %>
+                <%= select_tag(:requester_id, options_for_select(@people), class: "form-control", 'ng-model': 'history.requester_id') %>
+              </div>
+              <div class="col-md-3 form-group">
+                <%= label_tag(:deadline, "Deadline:") %>
+                <%= text_field_tag(:deadline, '', {class: "form-control date", 'ng-model': 'history.deadline', 'ng-blur': 'deadlineBlur()'}) %>
+              </div>
+              <div class="col-md-1 form-group">
+                <%= label_tag(:points, "Points:") %>
+                <%= select_tag(:points, options_for_select(@points), class: "form-control", 'ng-model': 'history.points') %>
+              </div>
+              <div class="col-md-12">
+                <%= label_tag(:description, "Description:") %>
+                <%= text_area_tag(:description, "", class: "form-control", 'ng-model': 'history.description') %>
+              </div>
+          </div> 
+          <hr/>
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Tasks</h4>
+            </div>
+            <div class="col-md-12">
+              <div class="progress">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ taskPercent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ taskPercent }}%">
+                  {{ taskPercent | percentage:2 }}
+                </div>
+              </div>
+            </div>
+
+            <div ng-repeat="task in history.tasks track by $index" class="col-md-12 panel">
+              <div class="col-md-1 form-group">
+                <input type="checkbox" ng-model="task.done" ng-click="taskDone(task.id)">
+              </div>
+              <div class="col-md-10 form-group">
+                <input type="text" class="form-control" ng-show="!task.done" ng-model="task.description" name="task[{{$index}}]">
+                <h5 ng-show="task.done"><strike>{{ task.description }}</strike></h5>
+              </div>
+              <div class="col-md-1" ng-click="rmHistory">
+                <a ng-click="rmTask($index)"><i class="glyphicon glyphicon-minus"></i></a>
+              </div>
+            </div>
+            <div class="pull-right col-md-2">
+              <a ng-click="addTask()"><i class="glyphicon glyphicon-plus"></i> Add task</a>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" ng-show="history.status == 'delivered'" ng-click="finish(history.id)" class="btn btn-default">Finish</button>
+            <button type="submit" class="btn btn-default">{{ !update ? 'Save' : 'Save changes' }}</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </form>
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
