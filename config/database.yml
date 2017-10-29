@@ -26,7 +26,7 @@ development:
 test: 
   adapter: postgresql
   encoding: unicode
-  database: mini_trello
+  database: mini_trello_test
   host: localhost
   pool: 5
   username: postgres

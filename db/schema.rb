@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20171021175104) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "histories", id: :serial, force: :cascade do |t|
+  create_table "histories", force: :cascade do |t|
     t.string "name"
     t.integer "requester_id"
     t.string "status"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20171021175104) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "people", id: :serial, force: :cascade do |t|
+  create_table "people", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -49,14 +49,15 @@ ActiveRecord::Schema.define(version: 20171021175104) do
     t.index ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true
   end
 
-  create_table "projects", id: :serial, force: :cascade do |t|
+  create_table "projects", force: :cascade do |t|
     t.string "name"
-    t.integer "manager_id"
+    t.bigint "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["manager_id"], name: "index_projects_on_manager_id"
   end
 
-  create_table "tasks", id: :serial, force: :cascade do |t|
+  create_table "tasks", force: :cascade do |t|
     t.string "description"
     t.integer "history_id"
     t.boolean "done"
@@ -67,6 +68,5 @@ ActiveRecord::Schema.define(version: 20171021175104) do
   add_foreign_key "histories", "people", column: "owner_id"
   add_foreign_key "histories", "people", column: "requester_id"
   add_foreign_key "histories", "projects"
-  add_foreign_key "projects", "people", column: "manager_id"
   add_foreign_key "tasks", "histories"
 end
