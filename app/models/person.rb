@@ -8,5 +8,5 @@ class Person < ActiveRecord::Base
   validates :name, :role, :email, presence: true
 
   has_many :projects
-  has_many :histories 
+  has_many :histories
 end
