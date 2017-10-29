@@ -261,7 +261,7 @@ DEPENDENCIES
   rails (= 5.1.4)
   rails-assets-angular (= 1.6.6)!
   rails-assets-bootstrap (= 3.3.7)!
-  rails-assets-bootstrap-notify
+  rails-assets-bootstrap-notify!
   rails-assets-datetimepicker!
   rails-assets-dragular!
   rails-assets-fontawesome!

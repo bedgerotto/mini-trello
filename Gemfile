@@ -62,6 +62,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-fontawesome'
   gem 'rails-assets-datetimepicker'
   gem 'rails-assets-dragular'
+  gem 'rails-assets-bootstrap-notify'
 end
 
 group :development, :test do
@@ -82,8 +83,6 @@ group :development do
   gem 'spring'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console'
-
-  gem 'rails-assets-bootstrap-notify'
 end
 
 ruby '2.3.5'
