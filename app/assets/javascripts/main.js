@@ -18,7 +18,8 @@ app.controller('MainCtrl', ['$scope', '$http', '$filter', '$element', 'dragularS
     $scope.tasks = [];
     $scope.taskPercent = 0;
 
-    $scope.percent = function() {
+    // Calculate the percentage of current history
+    /*$scope.percent = function() {
       var done = $scope.history.tasks.filter(function(tasks){
         if (tasks.done) {
           return true
@@ -27,21 +28,38 @@ app.controller('MainCtrl', ['$scope', '$http', '$filter', '$element', 'dragularS
       });
 
       $scope.taskPercent = (done.length / $scope.history.tasks.length) * 100;
+    }*/
+    // Calculate the percentage of current history
+    $scope.percent = function(tasks) {
+      var done = tasks.filter(function(t){
+        if (t.done) {
+          return true
+        }
+        return false
+      });
+
+      return (done.length / tasks.length) * 100;
     }
 
+    // starts the drag and drop service
     var drake = dragularService($element.children(), {
       scope: $scope
     });
 
+    // Watches event of drag and drop lib
     $scope.$on('dragulardrop', function(e, element, column) {
       e.stopPropagation();
+      // gets is from history that was moved
       var status = $(column).attr('data-status');
+      // gets the status that the columns represents
       var id = $(element).children().first().attr('data-card-id');
+      // wait 200 milliseconds to send request to api
       setTimeout(function() {
         $http.put('history/'+id+'/status', {status: status}).then(
           function(res) {
             if (!res.data) {
               $scope.errorAlert('Fail to move history');
+              // TODO: implement method who back card to origin columns if has error
             }
           }
         );
@@ -49,9 +67,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$filter', '$element', 'dragularS
     });
 
     $scope.$watch('history.deadline', function() {
-      if ($scope.history.deadline) {
-        $scope.history.deadline = $filter('date')(new Date($scope.history.deadline), 'yyyy/MM/dd hh:mm', '-0200');
-      }
+        $scope.history.deadline = $filter('date')($scope.history.deadline, 'yyyy/MM/dd HH:mm', 'UTC');
     })
 
     $scope.successAlert = function(msg) {
@@ -101,11 +117,9 @@ app.controller('MainCtrl', ['$scope', '$http', '$filter', '$element', 'dragularS
         $http.get('project/'+$scope.select.id+'/histories').then(
             function(histories) {
               // set histories to scope
-              console.log(histories.data)
               $scope.histories['pending'] = (histories.data.pending.length > 0) ? JSON.parse(histories.data.pending) : {};
               $scope.histories['started'] = (histories.data.started.length > 0) ? JSON.parse(histories.data.started) : {};
               $scope.histories['delivered'] = (histories.data.delivered.length > 0) ? JSON.parse(histories.data.delivered) : {};
-              console.log($scope.histories);
               // Hides modal
               $('#projectModal').modal('hide');
             },
@@ -221,16 +235,16 @@ app.controller('MainCtrl', ['$scope', '$http', '$filter', '$element', 'dragularS
 
     $scope.addTask = function() {
       $scope.history.tasks.push({});
-      $scope.percent();
+      $scope.taskPercent = $scope.percent($scope.history.tasks);
     }
 
     $scope.rmTask = function(i) {
       $scope.history.tasks.splice(i, 1);
-      $scope.percent();
+      $scope.taskPercent = $scope.percent($scope.history.tasks);
     }
 
     $scope.saveHistory = function() {
-      $scope.percent();
+      $scope.taskPercent = $scope.percent($scope.history.tasks);
       if (!$scope.update) {
         $http.post('history/store', {history: $scope.history, tasks: $scope.history.tasks, project_id: $scope.projectId}).then(
           function(res) {
@@ -239,7 +253,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$filter', '$element', 'dragularS
               $('#newHistoryModal').modal('hide');
               $scope.successAlert('History successfully created');
             } else {
-              console.log(res.data)
+              $scope.errorAlert('History successfully created');
             }
           },
           function(err) {
@@ -258,9 +272,9 @@ app.controller('MainCtrl', ['$scope', '$http', '$filter', '$element', 'dragularS
               });
               $scope.histories[res.data.status][i] = res.data;
               $('#newHistoryModal').modal('hide');
-              $scope.successAlert('History successfully update');
+              $scope.successAlert('History successfully updated');
             } else {
-              console.log(res.data);
+              $scope.successAlert('History successfully updated');
             }
           },
           function(err) {
@@ -275,8 +289,9 @@ app.controller('MainCtrl', ['$scope', '$http', '$filter', '$element', 'dragularS
         function(res) {
           if (res.data) {
             $scope.histories[status].splice(i, 1);
+            $scope.successAlert('History removed');
           } else {
-            console.log(res);
+            $scope.errorAlert('Fail to remove history');
           }
         },
         function(err) {
@@ -295,7 +310,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$filter', '$element', 'dragularS
       }, 100);
 
       $('#newHistoryModal').modal('show');
-      $scope.percent();
+      $scope.taskPercent = $scope.percent($scope.history.tasks);
     }
 
     // Fix to datetimepicker
@@ -304,7 +319,7 @@ app.controller('MainCtrl', ['$scope', '$http', '$filter', '$element', 'dragularS
     }
 
     $scope.taskDone = function(id) {
-      $scope.percent();
+      $scope.taskPercent = $scope.percent($scope.history.tasks);
       $http.put('task/'+id+'/done').then(
         function(res) {
           if (res.data == true) {

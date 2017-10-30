@@ -21,6 +21,10 @@
                 <li><a href="javascript:;" ng-click="rmHistory(pending.id, $index, 'pending')">Delete</a></li>
               </ul>
             </div>
+            <div class="col-md-12">
+              <p class="history-text pull-right">{{ percent(pending.tasks) | percentage:2 }}</p>
+              <p class="history-text">Deadline: {{ pending.deadline | date:"yyyy/MM/dd HH:mm" : "UTC" }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -45,6 +49,10 @@
                 <li><a href="javascript:;" ng-click="rmHistory(started.id, $index, 'started')">Delete</a></li>
               </ul>
             </div>
+            <div class="col-md-12">
+              <p class="history-text pull-right">{{ percent(started.tasks) | percentage:2 }}</p>
+              <p class="history-text">Deadline: {{ started.deadline | date:"yyyy/MM/hh HH:mm" : "UTC" }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -68,6 +76,10 @@
                 <li role="separator" class="divider"></li>
                 <li><a href="javascript:;" ng-click="rmHistory(delivered.id, $index, 'delivered')">Delete</a></li>
               </ul>
+            </div>
+            <div class="col-md-12">
+              <p class="history-text pull-right">{{ percent(delivered.tasks) | percentage:2 }}</p>
+              <p class="history-text">Deadline: {{ delivered.deadline | date:"yyyy/MM/hh HH:mm" : "UTC" }}</p>
             </div>
           </div>
         </div>
