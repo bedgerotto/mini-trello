@@ -15,8 +15,6 @@ gem 'bundler', '>= 1.15.4'
 gem 'railties', '5.1.4'
 gem 'sprockets-rails', '>= 2.0.0'
 
-# Use sqlite3 as the database for Active Record
-# gem 'sqlite3', '1.3.13'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 5.0.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -37,11 +35,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Devise is a flexible authentication solution for Rails based on Warden. It:
 gem 'devise'
-# Enables PostgreSql database usage
-gem 'pg'
-# A simple asset-pipeline wrapper for Vue.js by Evan You
-gem 'vuejs-rails'
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -67,6 +60,8 @@ end
 
 group :development, :test do
 
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3', '1.3.13'
   gem 'rspec-rails', '~> 3.0'
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -85,4 +80,9 @@ group :development do
   gem 'web-console'
 end
 
-ruby '2.3.5'
+group :production do
+  # Enables PostgreSql database usage
+  # gem 'pg'
+end
+
+ruby '2.4.1'

@@ -1,0 +1,9 @@
+{
+  "name": "my-rails-app",
+  "description": "my-rails-app",
+  "version": "1.0.0",
+  "dependencies": {
+    "webpack": "~1.4.13",
+    "vue": "~2.0"
+  }
+}

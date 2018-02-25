@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20171021175104) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "histories", force: :cascade do |t|
     t.string "name"
     t.integer "requester_id"
@@ -51,7 +48,7 @@ ActiveRecord::Schema.define(version: 20171021175104) do
 
   create_table "projects", force: :cascade do |t|
     t.string "name"
-    t.bigint "manager_id"
+    t.integer "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["manager_id"], name: "index_projects_on_manager_id"
@@ -65,8 +62,4 @@ ActiveRecord::Schema.define(version: 20171021175104) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "histories", "people", column: "owner_id"
-  add_foreign_key "histories", "people", column: "requester_id"
-  add_foreign_key "histories", "projects"
-  add_foreign_key "tasks", "histories"
 end

@@ -2,18 +2,22 @@
 <html>
 <head>
   <title>MiniTrello</title>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'classes/navbar', 'data-turbolinks-track' => true %>
+
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body ng-app="miniTrello" ng-controller="MainCtrl" ng-init="init()">
 
-<%= render partial: "layouts/shared/navbar" %>
+<div id="navigation">
+  <%= render partial: "layouts/shared/navbar" %>
+</div>
 <!-- Page Content -->
 <div class="container">
   <%= yield %>
 </div>
 <!-- /.container -->
 
-<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>

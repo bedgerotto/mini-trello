@@ -1,27 +1,32 @@
 <!-- Navigation -->
 <div class='notifications top-right'></div>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header col-md-6">
-            <% if person_signed_in? %>
-                <a class="navbar-brand" ng-click="changeProject()" ng-show="!enProjEdit">{{ projectName }}</a>
-                <div class="col-md-6"  ng-show="enProjEdit">
-                    <input type="text" class="form-control nav-input" ng-model="projectName" />
-                </div>
-                <div class="col-md-6">
-                    <a class="navbar-brand" ng-show="projectId" ng-click="enableEdit()"><i class="glyphicon glyphicon-pencil"></i></a>
-                    <a class="navbar-brand" ng-show="enProjEdit" ng-click="updateProject(projectName)"><i class="glyphicon glyphicon-ok"></i></a>
-                </div>
-            <% else %>
-                <p class="navbar-brand"> Mini-trello</p>
-            <% end %>
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header col-md-6" id='project-selection'>
+      <% if person_signed_in? %>
+        <a class="navbar-brand" @click="changeProject" v-if="!enProjEdit">{{ projectName }}</a>
+        <div class="col-md-6"  v-if="enProjEdit">
+          <input type="text" class="form-control nav-input" v-model="projectName" />
         </div>
-        <div class="pull-right person_actions">
-            <% if person_signed_in? %>
-                <%= render partial: "layouts/shared/person_dropdown" %>
-            <% end %>
+        <div class="col-md-6">
+          <a class="navbar-brand" v-if="projectId" @click="enableEdit"><i class="glyphicon glyphicon-pencil"></i></a>
+          <a class="navbar-brand" v-if="enProjEdit" @click="updateProject(projectName)"><i class="glyphicon glyphicon-ok"></i></a>
         </div>
+      <% else %>
+        <p class="navbar-brand"> Mini-trello</p>
+      <% end %>
     </div>
-    <!-- /.container -->
+    <div class="pull-right person_actions">
+      <% if person_signed_in? %>
+        <%= render partial: "layouts/shared/person_dropdown" %>
+      <% end %>
+    </div>
+  </div>
+  <!-- /.container -->
 </nav>
+<%= render partial: 'home/shared/project_modal'  %>
+
+<script>
+  var vueForm = new App.Navbar()
+</script>

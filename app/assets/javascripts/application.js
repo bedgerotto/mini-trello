@@ -10,7 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require angular
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
@@ -18,8 +17,8 @@
 //= require bootstrap-notify
 //= require datetimepicker
 //= require select2
-//= require dragular
-//= require_tree .
+//= require vue/dist/vue
+//= require_tree ./classes/
 
 $(document).ready(function() {
     $('#deadline').datetimepicker();
